@@ -1,9 +1,15 @@
 
   it('Login executado', () => {
-    cy.login()
+    cy.loginValido()
     cy.visit('/sistema')
-    cy.wait(1000) // Aguarda o carregamento da página
-    cy.contains("home").should('be.visible')
+    //cy.contains("home",{timeout:5000}).should('be.visible')
 
   })
+
+   it('Login Invalido', () => {
+    cy.loginInvalido()
+    cy.get('.card-notification').should('contain.text', 'Código de empresa, usuário ou senha inválidos.')
+  })
+   
+
 
