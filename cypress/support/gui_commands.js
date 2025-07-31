@@ -36,13 +36,14 @@ Cypress.Commands.add('cadastrarProduto', (produto) => {
   cy.get('#name').type(produto.nome)
   cy.get('#value').type(produto.preco)
   cy.get(':nth-child(2) > .input-group > .input-group-btn > .btn-primary').click()
+  cy.get('#flg_stock_control')
+  .should('have.value', '1'); //'1' representa a opção "Sim"
   cy.get('#btn-save-and-stock').click()
-
-  // Trata campo quantidade como select2
-  cy.get('.select2-selection').click()
+  cy.wait(2000)
+  cy.contains('#select2-id_stock-container', 'Estoque 1 (TESTE QA 5)');
+  //cy.contains('#select2-product_select_first-container', (produto.name).should('be.visible'));
   cy.get('.select2-search__field').type(produto.quantidade.toString())
   cy.get('.select2-results__option').first().click()
-
   cy.get('[style="display: block;"] > .stock-unitary-cost > .form-control').click().type(produto.preco)
-  cy.get('.form-footer > .row > :nth-child(1) > .btn').click()
+   cy.get('#btn-submit').click();
 })
