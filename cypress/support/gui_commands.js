@@ -22,17 +22,31 @@ Cypress.Commands.add('loginInvalido', () => {
   cy.get('button.btn-submit[type="submit"]').click()
 })
 
-Cypress.Commands.add('cadastrarProduto', (produto) => {
-  cy.visit('/sistema/produtos')
-
-  cy.get('.col-md-6 > :nth-child(1) > .btn-success').click()
+Cypress.Commands.add('cadastrarProdutoEstoque1', (produto) => {
+  cy.visit('/sistema/produto/novo/produto')
   cy.get('#name').type(produto.nome)
   cy.get('#value').type(produto.preco)
   cy.get(':nth-child(2) > .input-group > .input-group-btn > .btn-primary').click()
-  cy.get('#flg_stock_control')
-    .should('have.value', '1') //sim
-  cy.get('#btn-save-and-stock').click()
-  cy.contains('#select2-id_stock-container', 'Estoque 1 (TESTE QA 5)');
+  cy.get('#flg_stock_control').should('have.value', '1')
+  cy.get('#btn-submit').click()
+  
+
+})
+
+Cypress.Commands.add('cadastrarProduto0', (produto) => {
+  cy.visit('/sistema/produto/novo/produto')
+  cy.get('#name').type(produto.nome2)
+  cy.get('#value').type(produto.preco)
+  cy.get(':nth-child(2) > .input-group > .input-group-btn > .btn-primary').click()
+  cy.get('select[name="flg_stock_control"]').select('0');
+  cy.get('#btn-submit').click()
+
+})
+
+Cypress.Commands.add('cadastraEstoqueSucess', (produto) => {
+  cy.visit('sistema/estoque/movimentacao/nova/entrada')
+
+cy.contains('#select2-id_stock-container', 'Estoque 1 (TESTE QA 5)');
   cy.get('input[name="product[1][amount]"]')
     .clear()
     .type('50,00')
@@ -44,6 +58,7 @@ Cypress.Commands.add('cadastrarProduto', (produto) => {
   .click()
 
 })
+
 
 // Cadastra Venda e verifica estoque final
 
