@@ -75,7 +75,7 @@ describe('Cria Produto', () => {
   })
 
   
-Cypress.commands.add('cadastrarVenda', (produto) => {
+Cypress.commands.add('vendaProd', (produto) => {
   cy.visit('/sistema/vendas/nova')
   cy.get('#select2-products1id_product-0z-container') 
   .click();

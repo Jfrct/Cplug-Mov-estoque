@@ -11,13 +11,11 @@ describe('Cria Produto', () => {
     // Bloqueador de requests, a fim de tornar testes mais rapidos, retirado apenas se necessario verificação de requests
   
     cy.login()
-    cy.cadastrarProduto(produto);
-    // Acessa a página de produtos para verificar o estoque
-    cy.visit('/sistema/produtos')
   })
 
   it('Realiza venda e verifica o estoque', () => {
-    const estoqueInicial = [];
+    cy.vendaProd(produto)
+   /* const estoqueInicial = [];
     cy.get(':nth-child(5) > .center > .text-nowrap') // atualize com seletor exato
       .each(($el, index) => {
         const valorTexto = $el.text().trim();
@@ -25,9 +23,6 @@ describe('Cria Produto', () => {
         const valorNumerico = parseFloat(valorTexto.replace('.', '').replace(',', '.'));
         estoqueInicial.push(valorNumerico);
         cy.log(`Estoque inicial do item ${index}: ${valorNumerico}`)
-        console.log(`Estoque inicial do item ${index}: ${valorNumerico}`)
+        console.log(`Estoque inicial do item ${index}: ${valorNumerico}`)*/
       })
-
-    cy.cadastrarVenda(produto);
   })
-})
